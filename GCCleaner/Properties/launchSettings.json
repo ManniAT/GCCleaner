@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "GCCleaner": {
+      "commandName": "Project",
+      "commandLineArgs": "C:\\Daten\\Work\\GCCleaner\\Example.gcode"
+    }
+  }
+}
