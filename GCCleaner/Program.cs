@@ -58,7 +58,7 @@ namespace GCCleaner
                     {
                         gccSettings.FileNamePostFix = "_GC";
                     }
-                    if (string.IsNullOrEmpty(gccSettings.LineEnding?.Trim()))
+                    if (string.IsNullOrEmpty(gccSettings.LineEnding))
                     {
                         gccSettings.LineEnding = "\n";
                     }
