@@ -154,6 +154,7 @@ namespace GCCleaner
             Console.WriteLine("      \"Contains\": \" R\",");
             Console.WriteLine("      \"EndsWith\": \"\",");
             Console.WriteLine("      \"Matches\": \"\",");
+            Console.WriteLine("      \"KeepIfContains\": \"M73 P0\",");
             Console.WriteLine("      \"RemoveLine\": false,");
             Console.WriteLine("      \"Comment\": \"commented by GCCLeaner\"");
             Console.WriteLine("     }");

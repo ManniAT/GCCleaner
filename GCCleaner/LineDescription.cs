@@ -36,6 +36,12 @@ namespace GCCleaner
         /// <value>Exact value of the line</value>
         public string Matches { get; set; } = "";
         /// <summary>
+        /// Keeps the line (no matter what else matches) if this pattern is found
+        /// </summary>
+        /// <value>I use this with 'M175 P0' to keep the first line, which changes my marlin display to HH:mm:ss (done) of HH:mm:ss (open) instead of xx% HH:mm:ss (done).</value>
+        public string KeepIfContains { get; set; } = "";
+
+        /// <summary>
         /// Gets or sets the comment.
         /// </summary>
         /// <value>A comment placed at the end of a handled line - usefull for searches in the generated document - use patterns like $$$$$ or so to easily find them.</value>
@@ -50,6 +56,7 @@ namespace GCCleaner
         private bool _HasComment;
         private bool _HasContains;
         private bool _HasEndsWith;
+        private bool _HasKeepIfContains;
         private bool _HasMatches;
         private bool _HasStartsWith;
 
@@ -60,6 +67,7 @@ namespace GCCleaner
             _HasEndsWith = !string.IsNullOrEmpty(EndsWith);
             _HasMatches = !string.IsNullOrEmpty(Matches);
             _HasStartsWith = !string.IsNullOrEmpty(StartsWith);
+            _HasKeepIfContains= !string.IsNullOrEmpty(KeepIfContains);
 
             if (_HasComment) {
                 if (!Comment.StartsWith(";"))
@@ -90,6 +98,14 @@ namespace GCCleaner
                     throw (new LDException($"This LineDescription has a problem:{Environment.NewLine}{strTest}"));
                 }
             }
+            if (_HasKeepIfContains)
+            {
+                if (strLine.Contains(KeepIfContains, StringComparison.OrdinalIgnoreCase)) //check for existance - if found simply keep it
+                {
+                    return (false, null);
+                }
+            }
+
             if (_HasContains)
             {
                 if (!strLine.Contains(Contains, StringComparison.OrdinalIgnoreCase))
